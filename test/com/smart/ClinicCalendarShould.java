@@ -1,5 +1,9 @@
 package com.smart;
 
+import com.smart.ClinicCalendar;
+import com.smart.Doctor;
+import com.smart.PatientAppointment;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.format.DateTimeFormatter;
@@ -21,7 +25,7 @@ class ClinicCalendarShould {
         PatientAppointment enteredAppt = appointments.get(0);
         assertEquals("Jim", enteredAppt.getPatientFirstName());
         assertEquals("Weaver", enteredAppt.getPatientLastName());
-        assertEquals(Doctor.avery, enteredAppt.getDoctor());
+        Assertions.assertEquals(Doctor.avery, enteredAppt.getDoctor());
         assertEquals("9/1/2018 02:00 PM",
                 enteredAppt.getAppointmentDateTime().format(DateTimeFormatter.ofPattern("M/d/yyyy hh:mm a", Locale.US)));
     }
