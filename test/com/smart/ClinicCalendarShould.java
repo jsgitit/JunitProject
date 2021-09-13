@@ -10,7 +10,7 @@ import java.util.function.LongConsumer;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ClinicCalendarShould {
-    private ClinicCalendar calendar;
+    private ClinicCalendar calendar; // private field for ClinicCalendar instance.
 
     @BeforeAll
     static void testClassSetup() {
@@ -46,6 +46,7 @@ class ClinicCalendarShould {
     @Test
     void returnTrueForHasAppointmentsIfThereAreNoAppointments() {
         // arrange
+        // see init()
 
         // act
         calendar.addAppointment("Jim", "Weaver", "avery", "09/01/2021 2:00 pm");
@@ -57,6 +58,7 @@ class ClinicCalendarShould {
     @Test
     void returnFalseForHasAppointmentsIfThereAreNoAppointments() {
         // arrange
+        // see init()
 
         //act
         //Don't add any appointments
@@ -65,10 +67,10 @@ class ClinicCalendarShould {
         assertFalse(calendar.hasAppointment(LocalDate.of(2018, 9, 1)));  // assertTrue would be better practice
     }
 
-
     @Test
     void returnCurrentDaysAppointments() {
         // arrange
+        // see init()
 
         // act
         calendar.addAppointment("Jim", "Weaver", "avery",
@@ -87,7 +89,6 @@ class ClinicCalendarShould {
     void tearDownEachTest() {
         System.out.println("After Each...");
     }
-
 
     @AfterAll
     static void tearDownAllTests() {
