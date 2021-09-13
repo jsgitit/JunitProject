@@ -59,12 +59,12 @@ class ClinicCalendarShould {
     void returnCurrentDaysAppointments() {
         ClinicCalendar calendar = new ClinicCalendar(LocalDate.now());
         calendar.addAppointment("Jim", "Weaver", "avery",
-                "08/26/2018 2:00 pm");
+                "09/12/2021 2:00 pm");
         calendar.addAppointment("Jim", "Weaver", "avery",
-                "08/26/2018 3:00 pm");
+                "09/12/2021 3:00 pm");
         calendar.addAppointment("Jim", "Weaver", "avery",
                 "09/01/2018 2:00 pm");
         assertEquals(2, calendar.getTodayAppointments().size());
-
+        //assertIterableEquals(calendar.getTodayAppointments(), calendar.getAppointments());
     }
 }
