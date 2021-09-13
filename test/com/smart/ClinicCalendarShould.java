@@ -35,10 +35,10 @@ class ClinicCalendarShould {
         // arrange
         var calendar = new ClinicCalendar(LocalDate.now());
 
-        //act
+        // act
         calendar.addAppointment("Jim", "Weaver", "avery", "09/01/2021 2:00 pm");
 
-        //assert
+        // assert
         assertTrue(calendar.hasAppointment(LocalDate.of(2021, 9, 1)));
     }
 
@@ -57,13 +57,18 @@ class ClinicCalendarShould {
 
     @Test
     void returnCurrentDaysAppointments() {
+        // arrange
         ClinicCalendar calendar = new ClinicCalendar(LocalDate.now());
+
+        // act
         calendar.addAppointment("Jim", "Weaver", "avery",
                 "09/12/2021 2:00 pm");
         calendar.addAppointment("Jim", "Weaver", "avery",
                 "09/12/2021 3:00 pm");
         calendar.addAppointment("Jim", "Weaver", "avery",
                 "09/01/2018 2:00 pm");
+
+        // assert
         assertEquals(2, calendar.getTodayAppointments().size());
         //assertIterableEquals(calendar.getTodayAppointments(), calendar.getAppointments());
     }
