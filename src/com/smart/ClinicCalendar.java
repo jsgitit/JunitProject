@@ -1,35 +1,67 @@
 package com.smart;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ClinicCalendar {
 
    private List<PatientAppointment> appointments;
+   private LocalDate specificDay;
 
    public ClinicCalendar() {
+      this.appointments = new ArrayList<>();
+   }
+
+   public ClinicCalendar(LocalDate specificDay) {
+      this.specificDay = specificDay;
       this.appointments = new ArrayList<>();
    }
 
    public void addAppointment(String patientFirstName, String patientLastName, String doctorKey,
                               String dateTime) {
       Doctor doc = Doctor.valueOf(doctorKey.toLowerCase());
-      LocalDateTime apptTime;
+      LocalDateTime localDateTime;
       try {
-         apptTime = LocalDateTime.parse(dateTime.toUpperCase(),
-            DateTimeFormatter.ofPattern("M/d/yyyy h:mm a", Locale.US));
+         if (dateTime.toLowerCase().startsWith("today")) {
+            String[] parts = dateTime.split(" ", 2);
+            LocalTime time = LocalTime.parse(parts[1].toUpperCase(),
+                    DateTimeFormatter.ofPattern("h:mm a", Locale.US));
+            localDateTime = LocalDateTime.of(specificDay, time);
+         }
+         else {
+            localDateTime = LocalDateTime.parse(dateTime.toUpperCase(),
+                    DateTimeFormatter.ofPattern("M/d/yyyy h:mm a", Locale.US));
+         }
       } catch (Throwable t) {
          throw new RuntimeException("Unable to create date time from: [" +
-            dateTime.toUpperCase() + "], please enter with format [M/d/yyyy h:mm a]" + t.getMessage());
+                 dateTime + "], please enter with format [M/d/yyyy h:mm a], " + t.getMessage());
       }
       PatientAppointment appointment = new PatientAppointment(patientFirstName, patientLastName,
-         apptTime, doc);
+              localDateTime, doc);
       appointments.add(appointment);
    }
 
    public List<PatientAppointment> getAppointments() {
       return this.appointments;
    }
+   public List<PatientAppointment> getTodayAppointments() {
+      return appointments.stream()
+              .filter(appt -> appt.getAppointmentDateTime().toLocalDate().equals(specificDay))
+              .collect(Collectors.toList());
+   }
 
+   /**
+    *
+    * @param date
+    * @return true if there are any appointments scheduled for the date
+    */
+   public boolean hasAppointment(LocalDate date) {
+
+      return appointments.stream()
+              .anyMatch(appt -> appt.getAppointmentDateTime().toLocalDate().equals(date));
+   }
 }
