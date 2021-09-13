@@ -35,7 +35,7 @@ class DateTimeConverterTestShould {
     @Test
     void throwExceptionIfIncorrectPatternProvided() {
         // arrange
-
+        //
         // act
         Throwable err = assertThrows(RuntimeException.class, () ->
             DateTimeConverter.convertStringToDateTime("9/12/2021 100 pm",
