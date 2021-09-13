@@ -44,7 +44,7 @@ class DateTimeConverterTestShould {
         // assert
         // shows the actual error message vs. simple "RuntimeException"
         assertEquals("Unable to create date time from: [9/12/2021 100 pm], " +
-                "please enter with format [M/d/yyyy h:mm a], "+
+                "please enter with format [M/d/yyyy h:mm a], " +
                 "Text '9/12/2021 100 PM' could not be parsed at index 13", err.getMessage());
     }
 }
